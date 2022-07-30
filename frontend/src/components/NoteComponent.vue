@@ -16,6 +16,9 @@
 </template>
 
 <script>
+import store from '@/store'
+import { mapState } from 'vuex'
+
 export default {
   name: 'NoteComponent',
   props: {
@@ -24,13 +27,32 @@ export default {
     date: String
   },
 
+  data: function() {
+    return {
+      localCreateEdit: store.state.showCreateEditWindow
+    }
+  },
+
+  computed: mapState(['showCreateEditWindow']),
+
+  watch: {
+    localCreateEdit(newValue) {
+      store.state.showCreateEditWindow = newValue
+    },
+
+    showCreateEditWindow(newValue) {
+      this.localCreateEdit = newValue
+    }
+  },
+
   methods: {
     archive() {
       
     },
 
     edit() {
-
+      store.state.showCreateEditWindow = true
+      store.state.createEditType = 'edit'
     },
 
     remove() {

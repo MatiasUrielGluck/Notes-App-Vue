@@ -1,6 +1,6 @@
 <template>
   <div class="window">
-    <create-edit-window type="create" v-if="localCreateEdit"/>
+    <create-edit-window :type="localType" :id="localNote" v-if="localCreateEdit"/>
     <div class="container">
       <div class="top-row">
         <h1>My Notes</h1>
@@ -27,11 +27,13 @@ export default {
   },
   data: function() {
     return {
-      localCreateEdit: store.state.showCreateEditWindow
+      localCreateEdit: store.state.showCreateEditWindow,
+      localType: store.state.createEditType,
+      localNote: store.state.selectedNote
     }
   },
 
-  computed: mapState(['showCreateEditWindow']),
+  computed: mapState(['showCreateEditWindow', 'createEditType', 'selectedNote']),
 
   watch: {
     localCreateEdit(newValue) {
@@ -40,6 +42,14 @@ export default {
 
     showCreateEditWindow(newValue) {
       this.localCreateEdit = newValue
+    },
+
+    createEditType(newValue) {
+      this.localType = newValue
+    },
+
+    selectedNote(newValue) {
+      this.localNote = newValue
     }
   }
 }

@@ -12,7 +12,7 @@
         </div>
 
         <div class="action-container">
-            <button @click="showCreateEditWindow = false">Cancel</button>
+            <button @click="cancel()">Cancel</button>
             <button>Save</button>
         </div>
     </div>
@@ -24,7 +24,8 @@ import store from '@/store'
 export default {
   name: 'CreateEditWindow',
   props: {
-    type: String
+    type: String,
+    id: Number
   },
 
   data: function() {
@@ -36,6 +37,13 @@ export default {
   watch: {
     showCreateEditWindow(newValue) {
       store.state.showCreateEditWindow = newValue
+    }
+  },
+
+  methods: {
+    cancel() {
+        this.showCreateEditWindow = false
+        store.state.createEditType = 'create'
     }
   }
 }

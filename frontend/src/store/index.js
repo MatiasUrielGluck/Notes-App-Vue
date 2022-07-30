@@ -5,7 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    showCreateEditWindow: false
+    showCreateEditWindow: false,
+
+    createEditType: 'create',
+    
+    selectedNote: null
   },
   getters: {
   },
