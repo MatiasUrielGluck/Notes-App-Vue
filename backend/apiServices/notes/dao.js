@@ -31,7 +31,7 @@ module.exports = {
     },
     
     async createNote(title, content, categories="[]") {
-        const newNote = noteModel.create({
+        return noteModel.create({
             title: title,
             content: content,
             categories: categories

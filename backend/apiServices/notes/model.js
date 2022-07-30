@@ -7,7 +7,7 @@ const Note = sequelize.define('Note', {
         allowNull: false
     },
     content: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT('medium'),
         allowNull: true
     },
     categories: {
