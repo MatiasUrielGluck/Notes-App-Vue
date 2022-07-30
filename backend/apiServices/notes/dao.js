@@ -30,11 +30,12 @@ module.exports = {
         })
     },
     
-    async createNote(title, content, categories="[]") {
+    async createNote(title, content, categories="[]", archived="false") {
         return noteModel.create({
             title: title,
             content: content,
-            categories: categories
+            categories: categories,
+            archived: archived
         })
         .then(res => {
             return res
@@ -44,12 +45,13 @@ module.exports = {
         })
     },
     
-    async updateNote(id, title, content, categories) {
+    async updateNote(id, title, content, categories, archived="false") {
         return noteModel.upsert({
             id: id,
             title: title,
             content: content,
-            categories: categories
+            categories: categories,
+            archived: archived
         })
     },
 

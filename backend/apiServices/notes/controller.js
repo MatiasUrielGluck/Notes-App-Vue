@@ -13,15 +13,15 @@ module.exports = {
     },
     
     async createNote(req, res) {
-        const { title, content, categories } = req.body
-        const note = await noteDao.createNote(title, content, categories)
+        const { title, content, categories, archived } = req.body
+        const note = await noteDao.createNote(title, content, categories, archived)
         res.send(JSON.stringify(note))
     },
     
     async updateNote(req, res) {
         const { id } = req.params
-        const { title, content, categories } = req.body
-        const note = await noteDao.updateNote(id, title, content, categories)
+        const { title, content, categories, archived } = req.body
+        const note = await noteDao.updateNote(id, title, content, categories, archived)
         res.send(JSON.stringify(note))
     },
 
