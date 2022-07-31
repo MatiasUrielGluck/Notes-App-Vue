@@ -4,6 +4,9 @@ import store from '../../store'
 export default {
     getNotes: async function() {
         const data = await Api().get('/')
+        .catch(err => {
+            console.log(err)
+        })
         return data.data
     },
 
@@ -12,6 +15,8 @@ export default {
         .catch(err => {
             console.log(err)
         })
+
+        this.updateStoreNotes(await this.getNotes())
     },
 
     updateNote: async function(url, object) {
@@ -19,6 +24,8 @@ export default {
         .catch(err => {
             console.log(err)
         })
+
+        this.updateStoreNotes(await this.getNotes())
     },
 
     deleteNote: async function(url) {
@@ -26,6 +33,8 @@ export default {
         .catch(err => {
             console.log(err)
         })
+
+        this.updateStoreNotes(await this.getNotes())
     },
 
     updateStoreNotes: function(newValue) {

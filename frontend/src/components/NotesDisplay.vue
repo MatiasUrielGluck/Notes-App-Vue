@@ -1,7 +1,6 @@
 <template>
   <div class="notes-container">
-    <note-component v-for="note in localNotes" :key="note.id" :note="note" :date="createDate(note.updatedAt)"/>
-    <!-- <note-component :id="1" title="Esta es una nota" date="30/07/2022"/> -->
+    <note-component v-for="(note, index) in localNotes" :key="index" :note="note" :date="createDate(note.updatedAt)"/>
   </div>
 </template>
 
@@ -20,6 +19,7 @@ export default {
 
   data: function() {
     return {
+      componentKey: 0,
       localNotes: store.state.notes
     }
   },

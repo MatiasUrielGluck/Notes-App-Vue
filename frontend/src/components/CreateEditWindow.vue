@@ -44,9 +44,8 @@ export default {
   methods: {
     updateLocalContent(e) {
         this.tempContent = e.target.innerHTML
-        console.log(this.tempContent)
     },
-    
+
     cancel() {
         this.showCreateEditWindow = false
         store.state.createEditType = 'create'
@@ -56,28 +55,31 @@ export default {
         store.state.content = ''
     },
 
-    save() {
+    async save() {
         if (store.state.createEditType === 'create') {
-            Notes.createNote({
+            await Notes.createNote({
                 title: this.localTitle,
                 content: this.tempContent,
                 categories: "[]"
             })
-            
 
         } else if (store.state.createEditType === 'edit') {
-            Notes.updateNote('/' + this.localId, {
+            await Notes.updateNote('/' + this.localId, {
                 title: this.localTitle,
                 content: this.tempContent,
                 categories: "[]"
             })
         }
+
+        Notes.updateStoreNotes(await Notes.getNotes())
+        this.cancel()
     },
 
     loadInfo() {
         if (store.state.selectedNote) {
             this.localTitle = store.state.selectedNote.title
             this.localContent = store.state.selectedNote.content
+            this.tempContent = store.state.selectedNote.content
         }
     }
   },
