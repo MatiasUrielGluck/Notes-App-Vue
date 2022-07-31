@@ -1,6 +1,6 @@
 <template>
   <div class="window">
-    <create-edit-window :type="localType" :id="localNote" v-if="localCreateEdit"/>
+    <create-edit-window :type="localType" :id="localNote.id" v-if="localCreateEdit"/>
     <div class="container">
       <div class="top-row">
         <h1>My Notes</h1>
@@ -29,7 +29,7 @@ export default {
     return {
       localCreateEdit: store.state.showCreateEditWindow,
       localType: store.state.createEditType,
-      localNote: store.state.selectedNote
+      localNote: ''
     }
   },
 

@@ -6,10 +6,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     showCreateEditWindow: false,
-
     createEditType: 'create',
-    
-    selectedNote: null
+    selectedNote: null,
+    title: '',
+    content: '',
+
+    notes: []
   },
   getters: {
   },

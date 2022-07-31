@@ -3,7 +3,7 @@
     <div class="info-container">
       <i class="fa-solid fa-note-sticky fa-3x"></i>
       <div class="info">
-        <p>{{title}}</p>
+        <p>{{note.title}}</p>
         <p>Last edited: {{date}}</p>
       </div>
     </div>
@@ -22,13 +22,13 @@ import { mapState } from 'vuex'
 export default {
   name: 'NoteComponent',
   props: {
-    id: Number,
-    title: String,
+    note: Object,
     date: String
   },
 
   data: function() {
     return {
+      localNote: this.note,
       localCreateEdit: store.state.showCreateEditWindow
     }
   },
@@ -53,6 +53,8 @@ export default {
     edit() {
       store.state.showCreateEditWindow = true
       store.state.createEditType = 'edit'
+
+      store.state.selectedNote = this.note
     },
 
     remove() {

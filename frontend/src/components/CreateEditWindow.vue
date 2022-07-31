@@ -6,14 +6,14 @@
 
         <div class="container">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title">
+            <input type="text" name="title" id="title" v-model="localTitle">
             <p>Content</p>
-            <div class="content" contenteditable="true"></div>
+            <div class="content" contenteditable="true" @input="updateLocalContent"><span v-html="localContent"></span></div>
         </div>
 
         <div class="action-container">
             <button @click="cancel()">Cancel</button>
-            <button>Save</button>
+            <button @click="save()">Save</button>
         </div>
     </div>
   </div>
@@ -21,6 +21,9 @@
 
 <script>
 import store from '@/store'
+import Api from '../services/Api'
+import { mapState } from 'vuex'
+
 export default {
   name: 'CreateEditWindow',
   props: {
@@ -30,21 +33,81 @@ export default {
 
   data: function() {
     return {
-      showCreateEditWindow: store.state.showCreateEditWindow
-    }
-  },
-
-  watch: {
-    showCreateEditWindow(newValue) {
-      store.state.showCreateEditWindow = newValue
+        localId: this.id,
+        showCreateEditWindow: store.state.showCreateEditWindow,
+        localTitle: '',
+        localContent: '',
+        tempContent: ''
     }
   },
 
   methods: {
+    updateLocalContent(e) {
+        this.tempContent = e.target.innerHTML
+        if (e.target.firstElementChild.localName === 'span') {
+            // console.log('DIV')
+        } else {
+            // console.log('SPAN')
+        }
+        console.dir(e.target)
+        // console.log(this.tempContent)
+    },
+    
     cancel() {
         this.showCreateEditWindow = false
         store.state.createEditType = 'create'
+
+        store.state.selectedNote = ''
+        store.state.title = ''
+        store.state.content = ''
+    },
+
+    save() {
+        if (store.state.createEditType === 'create') {
+            Api().post('/', {
+                title: this.localTitle,
+                content: this.localContent,
+                categories: "[]"
+            })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        } else if (store.state.createEditType === 'edit') {
+            Api().patch('/' + this.localId)
+        }
+    },
+
+    loadInfo() {
+        if (store.state.selectedNote) {
+            this.localTitle = store.state.selectedNote.title
+            this.localContent = store.state.selectedNote.content
+        }
     }
+  },
+  
+  computed: mapState(['title', 'content']),
+
+  watch: {
+    showCreateEditWindow(newValue) {
+      store.state.showCreateEditWindow = newValue
+    },
+
+    title(newValue) {
+        this.localTitle = newValue
+    },
+
+    content(newValue) {
+      this.localContent = newValue
+    }
+  },
+
+  mounted() {
+    // this.content = 
+    this.loadInfo()
   }
 }
 </script>
