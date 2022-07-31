@@ -18,6 +18,7 @@
 <script>
 import store from '@/store'
 import { mapState } from 'vuex'
+import Notes from '../services/Notes'
 
 export default {
   name: 'NoteComponent',
@@ -57,8 +58,9 @@ export default {
       store.state.selectedNote = this.note
     },
 
-    remove() {
-
+    async remove() {
+      Notes.deleteNote('/' + this.note.id)
+      Notes.updateStoreNotes(await Notes.getNotes())
     },
   }
 }

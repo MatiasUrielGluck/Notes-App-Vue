@@ -8,7 +8,7 @@
 <script>
 import NoteComponent from './NoteComponent.vue'
 import store from '../store'
-import Api from '../services/Api'
+import Notes from '../services/Notes'
 import { mapState } from 'vuex'
 
 export default {
@@ -25,10 +25,10 @@ export default {
   },
 
   methods: {
-    async getNotes() {
-      const data = await Api().get('/')
-      return data.data
-    },
+    // async getNotes() {
+    //   const data = await Api().get('/')
+    //   return data.data
+    // },
 
     createDate(string) {
       let date = new Date(string).toDateString()
@@ -47,7 +47,8 @@ export default {
   },
 
   async mounted() {
-    store.state.notes = await this.getNotes()
+    store.state.notes = await Notes.getNotes()
+    // store.state.notes = await this.getNotes()
   }
 }
 </script>

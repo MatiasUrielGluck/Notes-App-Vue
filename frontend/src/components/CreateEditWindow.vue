@@ -8,7 +8,7 @@
             <label for="title">Title</label>
             <input type="text" name="title" id="title" v-model="localTitle">
             <p>Content</p>
-            <div class="content" contenteditable="true" @input="updateLocalContent"><span v-html="localContent"></span></div>
+            <span class="content" v-html="localContent" contenteditable="true" @input="updateLocalContent"></span>
         </div>
 
         <div class="action-container">
@@ -21,7 +21,7 @@
 
 <script>
 import store from '@/store'
-import Api from '../services/Api'
+import Notes from '../services/Notes'
 import { mapState } from 'vuex'
 
 export default {
@@ -44,13 +44,7 @@ export default {
   methods: {
     updateLocalContent(e) {
         this.tempContent = e.target.innerHTML
-        if (e.target.firstElementChild.localName === 'span') {
-            // console.log('DIV')
-        } else {
-            // console.log('SPAN')
-        }
-        console.dir(e.target)
-        // console.log(this.tempContent)
+        console.log(this.tempContent)
     },
     
     cancel() {
@@ -64,20 +58,19 @@ export default {
 
     save() {
         if (store.state.createEditType === 'create') {
-            Api().post('/', {
+            Notes.createNote({
                 title: this.localTitle,
-                content: this.localContent,
+                content: this.tempContent,
                 categories: "[]"
             })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            
 
         } else if (store.state.createEditType === 'edit') {
-            Api().patch('/' + this.localId)
+            Notes.updateNote('/' + this.localId, {
+                title: this.localTitle,
+                content: this.tempContent,
+                categories: "[]"
+            })
         }
     },
 
@@ -170,6 +163,8 @@ input, .content {
 }
 
 .content {
+    display: inline-block;
+    width: 100%;
     height: 200px;
 }
 
