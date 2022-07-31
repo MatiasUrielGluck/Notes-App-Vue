@@ -5,12 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // CreateEditWindow
     showCreateEditWindow: false,
     createEditType: 'create',
     selectedNote: null,
     title: '',
     content: '',
 
+    // DeleteWindow
+    showDeleteWindow: false,
+    noteToDelete: null,
+
+    // Notes
     notes: [],
     archivedNotes: []
   },

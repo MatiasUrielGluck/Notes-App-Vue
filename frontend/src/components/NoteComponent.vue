@@ -8,7 +8,8 @@
       </div>
     </div>
     <div class="action-container">
-      <i @click="archive()" class="fa-solid fa-box-archive fa-xl"></i>
+      <i @click="archive()" v-if="!note.archived" class="fa-solid fa-box-archive fa-xl"></i>
+      <i @click="unarchive()" v-if="note.archived" class="fa-solid fa-upload fa-xl"></i>
       <i @click="edit()" class="fa-solid fa-pen fa-xl"></i>
       <i @click="remove()" class="fa-solid fa-trash-can fa-xl"></i>
     </div>
@@ -57,6 +58,16 @@ export default {
       Notes.updateStoreNotes(await Notes.getNotes())
     },
 
+    async unarchive() {
+      await Notes.updateNote('/' + this.note.id, {
+        title: this.note.title,
+        content: this.note.content,
+        categories: this.note.categories,
+        archived: false
+      })
+      Notes.updateStoreNotes(await Notes.getNotes())
+    },
+
     edit() {
       store.state.showCreateEditWindow = true
       store.state.createEditType = 'edit'
@@ -65,8 +76,10 @@ export default {
     },
 
     async remove() {
-      Notes.deleteNote('/' + this.note.id)
-      Notes.updateStoreNotes(await Notes.getNotes())
+      store.state.showDeleteWindow = true
+      store.state.noteToDelete = this.note
+      // Notes.deleteNote('/' + this.note.id)
+      // Notes.updateStoreNotes(await Notes.getNotes())
     },
   }
 }

@@ -67,7 +67,8 @@ export default {
             await Notes.updateNote('/' + this.localId, {
                 title: this.localTitle,
                 content: this.tempContent,
-                categories: "[]"
+                categories: "[]",
+                archived: store.state.selectedNote.archived
             })
         }
 
