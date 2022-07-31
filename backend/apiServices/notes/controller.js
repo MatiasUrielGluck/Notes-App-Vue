@@ -17,6 +17,13 @@ module.exports = {
         const note = await noteDao.createNote(title, content, categories, archived)
         res.send(JSON.stringify(note))
     },
+
+    async addCategory(req, res) {
+        const { id } = req.params
+        const { categoryId } = req.body
+        const result = await noteDao.addCategory(id, categoryId)
+        res.send(result)
+    },
     
     async updateNote(req, res) {
         const { id } = req.params
@@ -27,6 +34,14 @@ module.exports = {
 
     async deleteNote(req, res) {
         const { id } = req.params
+        const { removecategory } = req.query
+
+        if (removecategory != undefined) {
+            console.log('===============' + removecategory + '==============')
+            await noteDao.removeCategory(id, removecategory)
+            res.send(200)
+            return
+        }
         const note = await noteDao.deleteNote(id)
         res.send(JSON.stringify(note))
     }

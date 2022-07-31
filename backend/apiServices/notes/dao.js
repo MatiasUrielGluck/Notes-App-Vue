@@ -1,9 +1,16 @@
 const sequelize = require('../../services/database')
+const Category = require('../categories/model')
 const noteModel = require('./model')
+const categoryModel = require('../categories/model')
+const categoryDao = require('../categories/dao')
+const associateModels = require('../associations')
+
+associateModels()
 
 module.exports = {
     async getNotes() {
         return noteModel.findAll({
+            include: Category,
             raw:true
         })
         .then(res => {
@@ -19,7 +26,7 @@ module.exports = {
             where: {
                 id: id
             },
-
+            include: Category,
             raw:true
         })
         .then(res => {
@@ -30,11 +37,10 @@ module.exports = {
         })
     },
     
-    async createNote(title, content, categories="[]", archived="false") {
+    async createNote(title, content, archived="false") {
         return noteModel.create({
             title: title,
             content: content,
-            categories: categories,
             archived: archived
         })
         .then(res => {
@@ -44,13 +50,42 @@ module.exports = {
             return err
         })
     },
+
+    async addCategory(id, categoryId) {
+        const note = await noteModel.findOne({
+            where: {
+                id: id
+            }
+        })
+        const category = await categoryModel.findOne({
+            where: {
+                id: categoryId
+            }
+        })
+        const result = await note.addCategory(category)
+        return result
+    },
+
+    async removeCategory(id, categoryId) {
+        const note = await noteModel.findOne({
+            where: {
+                id: id
+            }
+        })
+        const category = await categoryModel.findOne({
+            where: {
+                id: categoryId
+            }
+        })
+        const result = await note.removeCategory(category)
+        return result
+    },
     
-    async updateNote(id, title, content, categories, archived="false") {
+    async updateNote(id, title, content, archived="false") {
         return noteModel.upsert({
             id: id,
             title: title,
             content: content,
-            categories: categories,
             archived: archived
         })
     },

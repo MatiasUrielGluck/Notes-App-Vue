@@ -1,14 +1,16 @@
 const express = require('express')
 const app = express()
 const { port } = require('./config')
-const routes = require('./apiServices/notes/routes')
+const noteRoutes = require('./apiServices/notes/routes')
+const categoriesRoutes = require('./apiServices/categories/routes')
 const sequelize = require('./services/database')
 const cors = require('cors')
 
 app.use(cors())
 app.use(express.json())
 
-app.use('/notes', routes)
+app.use('/notes', noteRoutes)
+app.use('/categories', categoriesRoutes)
 
 app.listen(port, async () => {
     console.log(`Listening on port ${port}...`)
