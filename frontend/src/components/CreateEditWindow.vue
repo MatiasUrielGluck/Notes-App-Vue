@@ -169,6 +169,7 @@ input, .content {
     display: inline-block;
     width: 100%;
     height: 200px;
+    overflow: scroll;
 }
 
 @media only screen and (max-width:680px) {

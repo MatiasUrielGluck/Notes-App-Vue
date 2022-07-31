@@ -12,11 +12,6 @@ export default {
   name: 'NotesView',
   components: {
     ViewComponent
-  },
-  data: function() {
-    return {
-
-    }
   }
 }
 </script>

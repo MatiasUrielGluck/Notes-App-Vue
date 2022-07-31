@@ -24,11 +24,6 @@ export default {
   },
 
   methods: {
-    // async getNotes() {
-    //   const data = await Api().get('/')
-    //   return data.data
-    // },
-
     createDate(string) {
       let date = new Date(string).toDateString()
       let formatedDate = ''
@@ -49,7 +44,6 @@ export default {
 
   async mounted() {
     store.state.notes = await Notes.getNotes()
-    // store.state.notes = await this.getNotes()
   }
 }
 </script>
@@ -57,9 +51,15 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .notes-container {
-  margin-top: 2rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 48% 48%;
+  column-gap: 4%;
+  row-gap: 2rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .notes-container {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

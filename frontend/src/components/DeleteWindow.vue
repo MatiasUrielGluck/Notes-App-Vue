@@ -51,7 +51,7 @@ export default {
     bottom: 0;
     left: 0;
     margin: auto;
-    width: 40%;
+    width: fit-content;
     height: fit-content;
     display: flex;
     flex-flow: column nowrap;
@@ -70,7 +70,6 @@ export default {
 @media only screen and (max-width:400px) {
     .internal-window {
         width: 90%;
-        height: 70%;
     }
 }
 

@@ -78,8 +78,6 @@ export default {
     async remove() {
       store.state.showDeleteWindow = true
       store.state.noteToDelete = this.note
-      // Notes.deleteNote('/' + this.note.id)
-      // Notes.updateStoreNotes(await Notes.getNotes())
     },
   }
 }
@@ -94,6 +92,16 @@ export default {
   border: 1px solid black;
 }
 
+@media only screen and (max-width: 900px) {
+  .note {
+    flex-flow: column nowrap;
+  }
+
+  .action-container {
+    margin-top: 2rem;
+  }
+}
+
 .info-container {
   display: flex;
   align-items: center;
@@ -103,6 +111,11 @@ export default {
 .info-container p:first-of-type {
   margin-bottom: 0.5rem;
   font-weight: bold;
+}
+
+.info p:first-of-type {
+  overflow: hidden;
+  max-width: 19vw;
 }
 
 .action-container {
