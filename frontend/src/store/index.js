@@ -11,7 +11,8 @@ export default new Vuex.Store({
     title: '',
     content: '',
 
-    notes: []
+    notes: [],
+    archivedNotes: []
   },
   getters: {
   },

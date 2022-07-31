@@ -7,7 +7,7 @@
         <button @click="localCreateEdit = true">Create note</button>
         <router-link to="/archived">Archived notes</router-link>
       </div>
-      <notes-display :archived="false"/>
+      <notes-display :archived="0"/>
     </div>
   </div>
 </template>

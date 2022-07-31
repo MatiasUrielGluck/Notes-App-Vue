@@ -14,12 +14,11 @@ export default {
   components: {NoteComponent  },
   name: 'NotesDisplay',
   props: {
-    archived: Boolean
+    archived: Number
   },
 
   data: function() {
     return {
-      componentKey: 0,
       localNotes: store.state.notes
     }
   },
@@ -42,7 +41,9 @@ export default {
 
   watch: {
     notes(newValue) {
-      this.localNotes = newValue
+      this.localNotes = newValue.filter(note => {
+        return note.archived === this.archived
+      })
     }
   },
 
