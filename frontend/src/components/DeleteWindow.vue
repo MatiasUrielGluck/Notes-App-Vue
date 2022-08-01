@@ -19,6 +19,10 @@ export default {
 
   methods: {
     async yes() {
+        for (const category of store.state.noteToDelete.Categories) {
+            Notes.removeCategory(store.state.noteToDelete.id + '?removecategory=' + category.id, category.id)
+        }
+
         Notes.deleteNote('/' + store.state.noteToDelete.id)
         Notes.updateStoreNotes(await Notes.getNotes())
         this.no()

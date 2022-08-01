@@ -11,9 +11,16 @@
           <router-link to="/archived" v-if="!archived">Archived notes</router-link>
           <router-link to="/" v-if="archived">Go back to unarchived notes</router-link>
         </div>
+        <div class="filter-row">
+          <label for="categoryFilter">Category filter</label>
+          <select name="categoryFilter" id="categoryFilter" v-model="selectedFilter">
+            <option>All</option>
+            <option v-for="(category, index) in localCategories" :key="index">{{category.name}}</option>
+          </select>
+        </div>
       </div>
       <div class="content-container">
-        <notes-display :archived="archived"/>
+        <notes-display :archived="archived" :filter="selectedFilter" :key="selectedFilter"/>
       </div>
     </div>
   </div>
@@ -25,6 +32,7 @@ import CreateEditWindow from '@/components/CreateEditWindow.vue'
 import store from '@/store'
 import { mapState } from 'vuex'
 import DeleteWindow from './DeleteWindow.vue'
+import Categories from '../services/Categories'
 // @ is an alias to /src
 
 export default {
@@ -43,10 +51,12 @@ export default {
       localType: store.state.createEditType,
       localNote: '',
       localDelete: store.state.showDeleteWindow,
+      localCategories: null,
+      selectedFilter: 'All'
     }
   },
 
-  computed: mapState(['showCreateEditWindow', 'createEditType', 'selectedNote', 'showDeleteWindow']),
+  computed: mapState(['showCreateEditWindow', 'createEditType', 'selectedNote', 'showDeleteWindow', 'categories']),
 
   watch: {
     localCreateEdit(newValue) {
@@ -71,7 +81,15 @@ export default {
 
     selectedNote(newValue) {
       this.localNote = newValue
+    },
+
+    categories(newValue) {
+      this.localCategories = newValue
     }
+  },
+
+  async mounted() {
+    this.localCategories = await Categories.getCategories()
   }
 }
 </script>

@@ -15,7 +15,8 @@ export default {
   components: {NoteComponent  },
   name: 'NotesDisplay',
   props: {
-    archived: Number
+    archived: Number,
+    filter: String
   },
 
   data: function() {
@@ -39,6 +40,18 @@ export default {
     notes(newValue) {
       this.localNotes = newValue.filter(note => {
         return Number(note.archived) === this.archived
+      })
+
+      this.localNotes = this.localNotes.filter(note => {
+        if (this.filter === 'All') {
+          return note
+        }
+
+        for (const category of note.Categories) {
+          if (category.name === this.filter) {
+            return note
+          }
+        }
       })
     }
   },

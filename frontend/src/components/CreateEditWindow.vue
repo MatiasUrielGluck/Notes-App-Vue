@@ -54,7 +54,7 @@ export default {
 
         localCategories: null,
 
-        newCategoryInput: ''
+        newCategoryInput: '',
     }
   },
 
@@ -92,6 +92,11 @@ export default {
     },
 
     async addCategory() {
+        if (!this.localNote) {
+            alert('Please, save your new note before adding categories')
+            return
+        }
+
         if (this.localNote.Categories.find(category => category.name === this.newCategoryInput)) {
             return
         }

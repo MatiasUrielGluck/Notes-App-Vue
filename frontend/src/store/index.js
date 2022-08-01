@@ -18,7 +18,6 @@ export default new Vuex.Store({
 
     // Notes
     notes: [],
-    archivedNotes: [],
 
     // Categories
     categories: [],

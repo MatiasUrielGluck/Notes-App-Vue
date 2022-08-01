@@ -24,9 +24,13 @@ export default {
     methods: {
         deleteCategory() {
             Notes.removeCategory(this.directNote.id + '?removecategory=' + this.category.id, this.category.id)
-            let index = this.directNote.Categories.find(cat => {
-                return cat.id === this.category.id
-            })
+            let index = 0
+            for (const cat of this.localNote.Categories) {
+                if (cat.id === this.category.id) {
+                    break
+                }
+                index++
+            }
             this.localNote.Categories.splice(index, 1)
         }
     }
