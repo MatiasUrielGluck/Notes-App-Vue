@@ -1,5 +1,7 @@
 # Ensolvers challenge, by Matías Gluck
 
+Here is the [live deployed version](https://ensolvers-matiasurielgluck.netlify.app/) to the application.
+
 ## Requirements
 
 - [MySQL Community Server >= 8.0.30](https://dev.mysql.com/downloads/mysql/)
