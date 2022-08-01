@@ -18,7 +18,12 @@ body {
   background: var(--body-backgroud);
 }
 
+a {
+  font-size: 1rem;
+}
+
 button {
+  font-size: 1rem;
   cursor: pointer;
   color: white;
   border: none;

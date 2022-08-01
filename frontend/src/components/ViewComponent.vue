@@ -114,6 +114,12 @@ export default {
     background: var(--secondary-bcolor);
     border-radius: 12px;
     color: black;
+    transition: all 0.3s ease;
+  }
+
+  .top-row a:hover {
+    transform: scale(102%);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 
   .top-row button {
@@ -145,7 +151,7 @@ export default {
   .content-container::-webkit-scrollbar-thumb {
       border-radius: 8px;
       border: 2px solid white;
-      background-color: var(--secondary-bcolor);
+      background-color: var(--primary-bcolor);
   }
 
   .content-container::-webkit-scrollbar-track:vertical {

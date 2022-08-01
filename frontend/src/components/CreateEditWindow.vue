@@ -206,7 +206,7 @@ export default {
 .container::-webkit-scrollbar-thumb {
     border-radius: 8px;
     border: 2px solid white;
-    background-color: var(--secondary-bcolor);
+    background-color: var(--primary-bcolor);
 }
 
 .container::-webkit-scrollbar-track:vertical {
