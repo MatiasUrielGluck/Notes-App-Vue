@@ -71,6 +71,7 @@ if !(test -f "$CONFIGFILE"); then
         mysql -uroot -p${rootpasswd} -e "FLUSH PRIVILEGES;"
     fi
 
+    mkdir ./backend/config
     echo "module.exports = {" > $CONFIGFILE
     echo "    port: process.env.PORT || 3000," >> $CONFIGFILE
     echo "" >> $CONFIGFILE
