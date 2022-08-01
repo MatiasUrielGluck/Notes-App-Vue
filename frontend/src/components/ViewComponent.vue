@@ -95,6 +95,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../../public/styles.css';
   .container {
     margin: 2rem;
   }
@@ -110,7 +111,7 @@ export default {
    .top-row a {
     padding: 0.5rem 1rem;
     text-decoration: none;
-    background: #c6c6c6;
+    background: var(--secondary-bcolor);
     border-radius: 12px;
     color: black;
   }
@@ -128,10 +129,28 @@ export default {
   .content-container {
     margin-top: 1rem;
     padding: 0.5rem;
-    /* border: 1px solid black; */
     border-radius: 12px;
-    height: fit-content;
-    overflow: scroll;
+    height: 60vh;
+    overflow: auto;
+  }
+
+  .content-container::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  .content-container::-webkit-scrollbar:vertical {
+      width: 14px;
+  }
+
+  .content-container::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      border: 2px solid white;
+      background-color: var(--secondary-bcolor);
+  }
+
+  .content-container::-webkit-scrollbar-track:vertical {
+      border-radius: 8px;
+      background: rgba(0, 0, 0, .1);
   }
 
   @media only screen and (max-width: 600px) {

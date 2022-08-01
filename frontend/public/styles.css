@@ -3,6 +3,7 @@
 :root {
   --body-backgroud: #F2F2F2;
   --primary-bcolor: rgba(47, 128, 237, 1);
+  --secondary-bcolor: rgba(198, 198, 198, 1);
 }
 
 * {
