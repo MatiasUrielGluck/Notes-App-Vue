@@ -1,5 +1,7 @@
 <template>
   <div class="window">
+    <i class="fa-solid fa-circle-user fa-xl" id="userProfile" @click="toggleProfile"></i>
+    <button @click="logout()" id="logOut" :class="profileStatus">Logout</button>
     <create-edit-window :type="localType" :id="localNote.id" v-if="localCreateEdit"/>
     <delete-window v-if="localDelete"/>
     <div class="container">
@@ -33,6 +35,7 @@ import store from '@/store'
 import { mapState } from 'vuex'
 import DeleteWindow from './DeleteWindow.vue'
 import Categories from '../services/Categories'
+import router from '@/router'
 // @ is an alias to /src
 
 export default {
@@ -52,7 +55,25 @@ export default {
       localNote: '',
       localDelete: store.state.showDeleteWindow,
       localCategories: null,
-      selectedFilter: 'All'
+      selectedFilter: 'All',
+
+      profileStatus: 'hidden'
+    }
+  },
+
+  methods: {
+    logout() {
+      sessionStorage.removeItem('username')
+      router.push('/login')
+    },
+
+    toggleProfile() {
+      if (this.profileStatus === 'hidden') {
+        this.profileStatus = 'active' 
+      }
+      else { 
+        this.profileStatus = 'hidden'
+      }
     }
   },
 
@@ -96,6 +117,29 @@ export default {
 
 <style scoped>
 @import '../../public/styles.css';
+  #userProfile {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  #logOut {
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+    color: black;
+    background: var(--secondary-bcolor);
+    padding: 0.2rem 0.6rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .active {
+    display: inline-block;
+  }
+
   .container {
     margin: 2rem;
   }
