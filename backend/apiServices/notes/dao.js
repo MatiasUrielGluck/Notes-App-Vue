@@ -11,7 +11,7 @@ module.exports = {
     async getNotes() {
         return noteModel.findAll({
             include: Category,
-            raw:true
+            nest: true
         })
         .then(res => {
             return res
@@ -27,7 +27,7 @@ module.exports = {
                 id: id
             },
             include: Category,
-            raw:true
+            nest:true
         })
         .then(res => {
             return res

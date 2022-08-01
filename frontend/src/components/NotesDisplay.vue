@@ -9,6 +9,7 @@ import NoteComponent from './NoteComponent.vue'
 import store from '../store'
 import Notes from '../services/Notes'
 import { mapState } from 'vuex'
+import Categories from '../services/Categories'
 
 export default {
   components: {NoteComponent  },
@@ -37,13 +38,14 @@ export default {
   watch: {
     notes(newValue) {
       this.localNotes = newValue.filter(note => {
-        return note.archived === this.archived
+        return Number(note.archived) === this.archived
       })
     }
   },
 
   async mounted() {
     store.state.notes = await Notes.getNotes()
+    store.state.categories = await Categories.getCategories()
   }
 }
 </script>

@@ -9,6 +9,16 @@
             <input type="text" name="title" id="title" v-model="localTitle">
             <p>Content</p>
             <span class="content" v-html="localContent" contenteditable="true" @input="updateLocalContent"></span>
+            <p>Categories</p>
+            <div class="categories-container">
+                <category-component v-for="(category, index) in localCategories" :key="index" :category="category" :directNote="localNote"/>
+            </div>
+        </div>
+
+        <div class="new-category-container">
+            <label for="category">Add category</label>
+            <input type="text" name="category" id="category" v-model="newCategoryInput">
+            <button @click="addCategory()">Add</button>
         </div>
 
         <div class="action-container">
@@ -23,8 +33,10 @@
 import store from '@/store'
 import Notes from '../services/Notes'
 import { mapState } from 'vuex'
+import CategoryComponent from './CategoryComponent.vue'
 
 export default {
+  components: { CategoryComponent },
   name: 'CreateEditWindow',
   props: {
     type: String,
@@ -33,11 +45,16 @@ export default {
 
   data: function() {
     return {
+        localNote: null,
         localId: this.id,
         showCreateEditWindow: store.state.showCreateEditWindow,
         localTitle: '',
         localContent: '',
-        tempContent: ''
+        tempContent: '',
+
+        localCategories: null,
+
+        newCategoryInput: ''
     }
   },
 
@@ -49,7 +66,7 @@ export default {
     cancel() {
         this.showCreateEditWindow = false
         store.state.createEditType = 'create'
-
+        this.localNote = null
         store.state.selectedNote = ''
         store.state.title = ''
         store.state.content = ''
@@ -60,14 +77,12 @@ export default {
             await Notes.createNote({
                 title: this.localTitle,
                 content: this.tempContent,
-                categories: "[]"
             })
 
         } else if (store.state.createEditType === 'edit') {
             await Notes.updateNote('/' + this.localId, {
                 title: this.localTitle,
                 content: this.tempContent,
-                categories: "[]",
                 archived: store.state.selectedNote.archived
             })
         }
@@ -76,11 +91,29 @@ export default {
         this.cancel()
     },
 
+    async addCategory() {
+        if (this.localNote.Categories.find(category => category.name === this.newCategoryInput)) {
+            return
+        }
+
+        await Notes.addCategory({
+            name: this.newCategoryInput
+        }, this.localNote)
+
+        const newCategory = store.state.categories.find(category => category.name === this.newCategoryInput)
+        this.localNote.Categories.push(newCategory)
+        this.newCategoryInput = ''
+    },
+
     loadInfo() {
         if (store.state.selectedNote) {
+            // Notes info
+            this.localNote = store.state.selectedNote
             this.localTitle = store.state.selectedNote.title
             this.localContent = store.state.selectedNote.content
             this.tempContent = store.state.selectedNote.content
+
+            this.localCategories = this.localNote.Categories
         }
     }
   },
@@ -102,7 +135,6 @@ export default {
   },
 
   mounted() {
-    // this.content = 
     this.loadInfo()
   }
 }
@@ -128,7 +160,7 @@ export default {
     left: 0;
     margin: auto;
     width: 40%;
-    height: 80%;
+    height: 95%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
@@ -154,6 +186,7 @@ export default {
     display: grid;
     grid-template-columns: 20% 80%;
     row-gap: 10%;
+    overflow: scroll;
 }
 
 h1 {
@@ -182,6 +215,7 @@ input, .content {
 }
 
 .action-container {
+    
     margin-top: 2rem;
     align-self: center;
     display: flex;
@@ -190,6 +224,26 @@ input, .content {
 
 .action-container button {
     padding: 0.5rem 1rem;
+}
+
+.categories-container {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    column-gap: 10%;
+    row-gap: 1rem;
+    padding: 1rem;
+    height: fit-content;
+    width: 100%;
+    border: 1px solid rgb(182, 182, 182);
+}
+
+.new-category-container {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.new-category-container button {
+    margin-left: 10%;
 }
 
 </style>

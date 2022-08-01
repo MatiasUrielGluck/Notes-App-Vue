@@ -52,7 +52,6 @@ export default {
       await Notes.updateNote('/' + this.note.id, {
         title: this.note.title,
         content: this.note.content,
-        categories: this.note.categories,
         archived: true
       })
       Notes.updateStoreNotes(await Notes.getNotes())
@@ -62,7 +61,6 @@ export default {
       await Notes.updateNote('/' + this.note.id, {
         title: this.note.title,
         content: this.note.content,
-        categories: this.note.categories,
         archived: false
       })
       Notes.updateStoreNotes(await Notes.getNotes())

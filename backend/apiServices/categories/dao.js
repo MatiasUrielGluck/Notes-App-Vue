@@ -8,8 +8,7 @@ associateModels()
 module.exports = {
     async getCategories() {
         return categoryModel.findAll({
-            include: Note,
-            raw:true
+            include: [Note]
         })
         .then(res => {
             return res
@@ -24,8 +23,7 @@ module.exports = {
             where: {
                 id: id
             },
-            include: Note,
-            raw:true
+            include: [Note]
         })
         .then(res => {
             return res
