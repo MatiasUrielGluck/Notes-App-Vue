@@ -1,0 +1,26 @@
+{
+  "name": "ensolvers-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "cd frontend && npm run serve",
+    "backend": "cd backend && npm start",
+    "start": "concurrently -n 'client,server' -c 'green,blue' \"npm run frontend\" \"npm run backend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camilapensolvers/GitHubMatiasUrielGluck-Ensolvers-challange.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/camilapensolvers/GitHubMatiasUrielGluck-Ensolvers-challange/issues"
+  },
+  "homepage": "https://github.com/camilapensolvers/GitHubMatiasUrielGluck-Ensolvers-challange#readme",
+  "dependencies": {
+    "concurrently": "^7.3.0"
+  }
+}
