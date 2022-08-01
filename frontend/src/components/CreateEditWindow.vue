@@ -16,8 +16,7 @@
         </div>
 
         <div class="new-category-container">
-            <label for="category">Add category</label>
-            <input type="text" name="category" id="category" v-model="newCategoryInput">
+            <input type="text" name="category" id="category" v-model="newCategoryInput" placeholder="Type your new category here">
             <button @click="addCategory()">Add</button>
         </div>
 
@@ -147,6 +146,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import '../../public/styles.css';
 .external-window {
     position: absolute;
     top: 0;
@@ -164,26 +164,27 @@ export default {
     bottom: 0;
     left: 0;
     margin: auto;
-    width: 40%;
+    width: 60%;
+    max-width: 800px;
     height: 95%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
-    background: #fff;
+    background: var(--body-backgroud);
     border-radius: 12px;
     padding: 2rem;
 }
 
 @media only screen and (max-width:1280px) {
     .internal-window {
-        width: 70%;
+        width: 85%;
     }
 }
 
-@media only screen and (max-width:400px) {
+@media only screen and (max-width:450px) {
     .internal-window {
-        width: 90%;
-        height: 70%;
+        width: 95%;
+        height: 80%;
     }
 }
 
@@ -191,14 +192,34 @@ export default {
     display: grid;
     grid-template-columns: 20% 80%;
     row-gap: 10%;
-    overflow: scroll;
+    overflow: auto;
+}
+
+.container::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.container::-webkit-scrollbar:vertical {
+    width: 14px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: var(--primary-bcolor);
+}
+
+.container::-webkit-scrollbar-track:vertical {
+    border-radius: 8px;
+    background: rgba(0, 0, 0, .1);
 }
 
 h1 {
     text-align: center;
 }
 
-input, .content {
+input, .content  {
+    background: white;
     border: 1px solid rgb(182, 182, 182);
     padding: 0.5rem;
 }
@@ -212,15 +233,24 @@ input, .content {
 
 @media only screen and (max-width:680px) {
     .container {
-        grid-template-columns: 25% 75%;
+        grid-template-columns: 1fr;
+        row-gap: 0;
     }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+
+    input, span {
+        margin-bottom: 1rem;
+    }
+
     .content {
         height: 150px;
     }
 }
 
 .action-container {
-    
     margin-top: 2rem;
     align-self: center;
     display: flex;
@@ -243,12 +273,14 @@ input, .content {
 }
 
 .new-category-container {
+    margin-top: 1rem;
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 80% 20%;
 }
-
 .new-category-container button {
     margin-left: 10%;
+    padding: 0.55rem;
+    height: fit-content;
 }
 
 </style>

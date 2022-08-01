@@ -88,6 +88,13 @@ export default {
   justify-content: space-between;
   padding: 2rem;
   border: 1px solid black;
+  background: white;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.note:hover {
+  transform: scale(101%);
 }
 
 @media only screen and (max-width: 900px) {

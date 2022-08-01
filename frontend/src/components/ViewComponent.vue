@@ -107,8 +107,15 @@ export default {
     border-bottom: 2px solid black;
   }
 
+   .top-row a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: #c6c6c6;
+    border-radius: 12px;
+    color: black;
+  }
+
   .top-row button {
-    cursor: pointer;
     padding: 0.5rem 1rem;
   }
 
@@ -123,7 +130,7 @@ export default {
     padding: 0.5rem;
     /* border: 1px solid black; */
     border-radius: 12px;
-    height: 72vh;
+    height: fit-content;
     overflow: scroll;
   }
 
@@ -131,5 +138,10 @@ export default {
     .top-row {
       flex-flow: column nowrap;
     }
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 0.5rem;
   }
 </style>
