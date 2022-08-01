@@ -1,6 +1,7 @@
 # Ensolvers challenge, by Matías Gluck
 
 Here is the [live deployed version](https://ensolvers-matiasurielgluck.netlify.app/) to the application.
+
 The default username to login is 'admin' and the password is '12345'.
 
 ## Requirements
