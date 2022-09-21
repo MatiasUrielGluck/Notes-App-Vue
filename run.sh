@@ -29,8 +29,8 @@ if !(test -f "$CONFIGFILE"); then
     echo "Running the application for the first time."
     echo ""
     echo "Please, enter the new database username and password":
-    username="matiasurielgluck"
-    userpass="12345"
+    username="notesappmatiasurielgluck"
+    userpass="notespassword12345"
     # =========================== 
 
     # Create database
@@ -38,7 +38,7 @@ if !(test -f "$CONFIGFILE"); then
     
     if [ -f /root/.my.cnf ]; then
         echo "Creating new MySQL database..."
-        mysql -e "CREATE DATABASE challengematiasgluck /*\!40100 DEFAULT CHARACTER SET utf8 */;" 2> error.txt || command_error
+        mysql -e "CREATE DATABASE notesappmgluck /*\!40100 DEFAULT CHARACTER SET utf8 */;" 2> error.txt || command_error
         echo "Showing existing databases..."
         mysql -e "show databases;"
         echo ""
@@ -47,8 +47,8 @@ if !(test -f "$CONFIGFILE"); then
         echo ""
         echo "NOTE: If you get ERROR 1396, then the user already exists. No problem."
         echo ""
-        echo "Granting ALL privileges on challengematiasgluck to ${username}!"
-        mysql -e "GRANT ALL PRIVILEGES ON challengematiasgluck.* TO '${username}'@'localhost';"
+        echo "Granting ALL privileges on notesappmgluck to ${username}!"
+        mysql -e "GRANT ALL PRIVILEGES ON notesappmgluck.* TO '${username}'@'localhost';"
         mysql -e "FLUSH PRIVILEGES;"
         
     # If /root/.my.cnf doesn't exist then it'll ask for root password	
@@ -56,7 +56,7 @@ if !(test -f "$CONFIGFILE"); then
         echo "Please enter root user MySQL password"
         echo "Note: password will be hidden when typing"
         read -s rootpasswd
-        mysql -uroot -p${rootpasswd} -e "CREATE DATABASE challengematiasgluck /*\!40100 DEFAULT CHARACTER SET utf8 */;" 2> error.txt || command_error
+        mysql -uroot -p${rootpasswd} -e "CREATE DATABASE notesappmgluck /*\!40100 DEFAULT CHARACTER SET utf8 */;" 2> error.txt || command_error
         echo "Database successfully created!"
         echo "Showing existing databases..."
         mysql -uroot -p${rootpasswd} -e "show databases;"
@@ -66,8 +66,8 @@ if !(test -f "$CONFIGFILE"); then
         echo ""
         echo "NOTE: If you get ERROR 1396, then the user already exists. No problem."
         echo ""
-        echo "Granting ALL privileges on challengematiasgluck to ${username}!"
-        mysql -uroot -p${rootpasswd} -e "GRANT ALL PRIVILEGES ON challengematiasgluck.* TO '${username}'@'localhost';"
+        echo "Granting ALL privileges on notesappmgluck to ${username}!"
+        mysql -uroot -p${rootpasswd} -e "GRANT ALL PRIVILEGES ON notesappmgluck.* TO '${username}'@'localhost';"
         mysql -uroot -p${rootpasswd} -e "FLUSH PRIVILEGES;"
     fi
 
@@ -78,7 +78,7 @@ if !(test -f "$CONFIGFILE"); then
     echo "    database: {" >> $CONFIGFILE
     echo "        username: '"$username"',"  >> $CONFIGFILE
     echo "        password: '"$userpass"'," >> $CONFIGFILE
-    echo '        database: "challengematiasgluck",' >> $CONFIGFILE
+    echo '        database: "notesappmgluck",' >> $CONFIGFILE
     echo '        host: "localhost",' >> $CONFIGFILE
     echo '        dialect: "mysql"' >> $CONFIGFILE
     echo '    }' >> $CONFIGFILE

@@ -1,6 +1,6 @@
-# Ensolvers challenge, by Matías Gluck
+# Notes App, by Matías Gluck
 
-Here is the [live deployed version](https://ensolvers-matiasurielgluck.netlify.app/) to the application.
+Here is the [live deployed version](https://note-app-matiasurielgluck.netlify.app/) to the application.
 
 The default username to login is 'admin' and the password is '12345'.
 

@@ -1,5 +1,5 @@
 {
-  "name": "ensolvers-challenge",
+  "name": "notes-app-matiasurielgluck",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/camilapensolvers/GitHubMatiasUrielGluck-Ensolvers-challange.git"
+    "url": ""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/camilapensolvers/GitHubMatiasUrielGluck-Ensolvers-challange/issues"
+    "url": "https://"
   },
-  "homepage": "https://github.com/camilapensolvers/GitHubMatiasUrielGluck-Ensolvers-challange#readme",
+  "homepage": "",
   "dependencies": {
     "concurrently": "^7.3.0"
   }

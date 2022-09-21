@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="panel">
-      <h1>Ensolvers Challenge Notes</h1>
+      <h1>Notes App</h1>
       <div class="input-container">
         <input type="text" placeholder="Username" v-model="username">
         <input type="password" placeholder="Password" v-model="password">
